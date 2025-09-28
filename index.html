@@ -1,79 +1,358 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vishal Kumar Maurya - Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vishal Kumar Maurya - Professional Portfolio</title>
+  <style>
+    /* Light/White Theme Colors */
+    :root {
+      --primary-color: #007bff; /* Primary Blue */
+      --secondary-color: #343a40; /* Dark Text */
+      --background-light: #ffffff; /* White Background */
+      --card-background: #f8f9fa; /* Light Gray Card Background */
+      --text-dark: #212529; /* Very Dark Text */
+      --border-color: #dee2e6; /* Light Border */
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--background-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: var(--primary-color);
+      color: white;
+    }
+    header h1 {
+      margin: 10px 0 5px;
+      font-size: 2rem;
+      color: white; /* Title remains white on blue background */
+    }
+    header h3 {
+      margin: 0;
+      font-weight: normal;
+      color: #cce5ff; /* Lighter text for subtitle */
+    }
+    nav {
+      text-align: center;
+      background: var(--background-light);
+      padding: 10px;
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: var(--secondary-color);
+      font-weight: 500;
+      transition: color 0.3s, border-bottom 0.3s;
+      padding-bottom: 5px;
+    }
+    nav a:hover {
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--primary-color);
+    }
+    section {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px 30px;
+      background: var(--card-background); /* Light gray background for sections */
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    section h2 {
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 5px;
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
+      margin-bottom: 10px;
+      color: var(--text-dark);
+    }
+    
+    /* Custom styling for Education/Experience list details */
+    .detail-item {
+      margin-bottom: 25px;
+      padding-left: 15px;
+      border-left: 3px solid var(--primary-color);
+      background: white; /* White background for detail items */
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .detail-item strong {
+      color: var(--primary-color);
+      display: block;
+      font-size: 1.1rem;
+    }
+    .detail-item p {
+      color: var(--secondary-color);
+      margin-top: 5px;
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+    }
+    .detail-item ul {
+        margin-top: 10px;
+        padding-left: 0;
+    }
+    .detail-item ul li {
+        list-style: disc; 
+        margin-bottom: 5px;
+        font-size: 0.95rem;
+        margin-left: 20px;
+        color: var(--secondary-color);
+    }
+    .detail-item ul li::before {
+        content: none;
+    }
+    
+    /* --- Skills Section Styling --- */
+    .skills-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+    .skills-group {
+        flex: 1 1 45%;
+        min-width: 250px;
+        padding: 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        background: white;
+    }
+    .skills-group h3 {
+        color: var(--text-dark);
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 5px;
+        margin-top: 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+    .skills-group ul {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+        list-style: none;
+    }
+    .skills-group ul li {
+        background-color: #007bff1a; /* Light blue background for skills tag */
+        color: var(--primary-color);
+        padding: 5px 10px;
+        margin: 5px;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        border: 1px solid var(--primary-color);
+        margin-left: 0;
+    }
+
+
+    /* --- Project Cards (Light Theme) --- */
+    .project-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 123, 255, 0.2);
+    }
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+      color: var(--primary-color);
+    }
+    .card p {
+      font-size: 0.95rem;
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+    }
+    .card a {
+      display: inline-block;
+      padding: 8px 12px;
+      margin-right: 10px;
+      background: #28a745; /* Green for Live/Demo */
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+    .card a:hover {
+      background: #218838;
+    }
+    .card .github-link {
+      background: var(--secondary-color); /* Dark color for GitHub link */
+      border: 1px solid var(--secondary-color);
+      color: white;
+    }
+    .card .github-link:hover {
+      background: var(--text-dark);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: var(--secondary-color);
+      color: white;
+      border-top: 1px solid var(--border-color);
+      margin-top: 40px;
+      font-size: 0.9rem;
+    }
+    .links a {
+      margin: 0 10px;
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+    .links a:hover {
+      opacity: 0.7;
+    }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans">
-    
-    <header class="p-8 text-center bg-gradient-to-r from-green-400 to-blue-500 text-white">
-        <h1 class="text-4xl font-bold mb-2">Vishal Kumar Maurya</h1>
-        <p class="text-lg">B.Sc (Hons) Agriculture | Aspiring Agri-Tech Innovator</p>
-    </header>
+<body>
+  <header>
+    <h1>Vishal Kumar Maurya</h1>
+    <h3>B.Sc (Hons) Agriculture | Aspiring Agri-Tech Innovator</h3>
+  </header>
 
-    <section class="p-8 max-w-4xl mx-auto">
-        <h2 class="text-2xl font-semibold mb-4">About Me</h2>
-        <p class="text-gray-600">As an aspiring Agricultural Scholar at Bundelkhand University (2022-2026), my academic journey is enriched with hands-on experience from a recent internship at the Indian Chamber of Food and Agriculture. There, I focused on agricultural subsidies and applied research skills, deepening my understanding of policy impacts on farming communities.</p>
-        <p class="mt-4 text-gray-600">Serving as a Campus Ambassador for Pregrad honed my competencies in sales and communication, equipping me with the ability to advocate effectively for educational initiatives. I am committed to leveraging these experiences to foster advancements in sustainable agriculture practices. I have a particular interest in Logistics and Supply Chain Management.</p>
-    </section>
-    
-    <section class="p-8 max-w-4xl mx-auto">
-        <h2 class="text-2xl font-semibold mb-4">Education</h2>
-        <div class="space-y-6">
-            <div>
-                <h3 class="text-xl font-bold">Bundelkhand University</h3>
-                <p>B.Sc Honours in Agriculture A (2022 - 2026)</p>
-                <p class="text-gray-600">I learned sustainable agriculture practices and modern farming techniques. Actively involved in a 240-hour camp under NSS, contributing to community development and social welfare initiatives.</p>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold">Uttar Pradesh State Board of High School and Intermediate Education (UPMSP)</h3>
-                <p>1290-Ramsurat Malati Intermediate College, Rajgarh Mirzapur</p>
-                <p>12th Agriculture | 74.7% (2020 - 2022)</p>
-                <p class="text-gray-600">I shifted to Ramsurat Malati Intermediate College Mirzapur in Class 11th and 12th to study agriculture.</p>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold">Uttar Pradesh State Board of High School and Intermediate Education (UPMSP)</h3>
-                <p>1082-Jansewa Intermediate College, Phulwari Sonbhadra</p>
-                <p>10th PCMB-CS | 77% (2018 - 2020)</p>
-                <p class="text-gray-600">I shifted to Jansewa Intermediate College Sonbhadra in Class 8th for a better study environment and because I was interested in computer science.</p>
-            </div>
-        </div>
-    </section>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-    <section class="p-8 max-w-4xl mx-auto">
-        <h2 class="text-2xl font-semibold mb-4">Licenses & Certifications</h2>
-        <ul class="list-disc list-inside space-y-2">
-            <li>Career Advancement Bootcamp – Medha (Credential ID: STU243238)</li>
-            <li>Agribusiness Knowledge Series – ISAB Greater Noida</li>
-            <li>Agriculture 4.0 – The Future of Farming Technology – Just Agriculture (Credential ID: AEEFWS/3757)</li>
-            <li>Course on Computer Concepts (CCC) – NIELIT (Credential ID: GO2108034430)</li>
-            <li>Fundamentals of Digital Marketing – Google Garage (Credential ID: ZCD 36G ZEF)</li>
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I am an aspiring Agricultural Scholar at Bundelkhand University (2022-2026), enriched with hands-on experience from my internship at the Indian Chamber of Food and Agriculture. I focused on agricultural subsidies, research skills, and policy impacts on farming communities. 
+    </p>
+    <p>
+      As a Campus Ambassador for Pregrad, I honed my sales and communication skills. With a strong interest in sustainable agriculture and Logistics & Supply Chain Management, I aim to bring innovative solutions to the Agri-Tech sector.
+    </p>
+  </section>
+
+  <section id="experience">
+    <h2>Work Experience</h2>
+    <div class="detail-item">
+      <strong>Internship: Agricultural Subsidies Analysis</strong>
+      <p>INDIAN CHAMBER OF FOOD AND AGRICULTURE | Mar 2024 – May 2024</p>
+      <ul>
+        <li>Completed an online internship focused on **Agricultural Subsidies**.</li>
+        <li>This experience included an overview of the organization and the duration of my internship.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div class="detail-item">
+      <strong>B.Sc (Hon's) Agriculture</strong>
+      <p>BUNDELKHAND UNIVERSITY JHANSI | Aug 2022 – Aug 2026</p>
+      <ul>
+        <li>Gained expertise in sustainable agriculture practices and modern farming techniques.</li>
+        <li>Involved in NSS Camp.</li>
+      </ul>
+    </div>
+    <div class="detail-item">
+      <strong>12th Agriculture Science | 74.7%</strong>
+      <p>UTTAR PRADESH STATE BOARD (UPMSP) | Ramsurat Malati Intermediate College, Mirzapur | Jul 2020 – Jul 2022</p>
+    </div>
+    <div class="detail-item">
+      <strong>10th Science | 77%</strong>
+      <p>UTTAR PRADESH STATE BOARD (UPMSP) | Jansewa Intermediate College, Sonbhadra | Jul 2018 – Jul 2020</p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-container">
+      <div class="skills-group">
+        <h3>Technical Skills</h3>
+        <ul>
+          <li>Microsoft Power Point</li>
+          <li>Microsoft Word</li>
+          <li>Microsoft Excel</li>
+          <li>Office Suite</li>
         </ul>
-    </section>
+      </div>
+      <div class="skills-group">
+        <h3>Soft Skills</h3>
+        <ul>
+          <li>Communication</li>
+          <li>Teamwork</li>
+          <li>Leadership</li>
+          <li>Work Ethic</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <section class="p-8 max-w-4xl mx-auto">
-        <h2 class="text-2xl font-semibold mb-4">Internship</h2>
-        <div>
-            <h3 class="text-xl font-bold">Indian Chamber of Food and Agriculture</h3>
-            <p>Summer Internship (Mar 2024 - May 2024) | New Delhi, Delhi, India</p>
-            <p class="text-gray-600">Worked on a training report titled “Agriculture Subsidies under Government Schemes.” This remote internship helped me understand various government support programs for farmers and their real-world applications.</p>
-        </div>
-    </section>
+  <section id="certifications">
+    <h2>Licenses & Certifications</h2>
+    <ul>
+      <li>Career Advancement Bootcamp – Medha (Credential ID: **STU243238**)</li>
+      <li>Agribusiness Knowledge Series – ISAB Greater Noida</li>
+      <li>Agriculture 4.0 – The Future of Farming Technology – Just Agriculture (Credential ID: **AEEFWS/3757**)</li>
+      <li>Course on Computer Concepts (CCC) – NIELIT (Credential ID: **GO2108034430**)</li>
+      <li>Fundamentals of Digital Marketing – Google Garage (Credential ID: **ZCD 36G ZEF**)</li>
+    </ul>
+  </section>
 
-    <section class="p-8 max-w-4xl mx-auto">
-        <h2 class="text-2xl font-semibold mb-4">Volunteer Experience</h2>
-        <div>
-            <h3 class="text-xl font-bold">National Service Scheme (NSS)</h3>
-            <p>Volunteer (Aug 2022 - Aug 2024)</p>
-            <p class="text-gray-600">Volunteered for a 240-hour camp as part of the National Service Scheme (NSS), contributing to community development and social welfare initiatives.</p>
-        </div>
-    </section>
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project-cards">
+      <div class="card">
+        <h3>Farmer-Friendly Agri-Loan & Subsidy Tracker</h3>
+        <p>A digital platform (coming soon) to help farmers easily track government loan schemes and subsidies.</p>
+        <a href="#">🔍 Demo</a>
+        <a href="https://github.com/vishalkumarmaurya" class="github-link" target="_blank">💻 View on GitHub</a>
+      </div>
+      <div class="card">
+        <h3>Logistics & Supply Chain Management Project</h3>
+        <p>Research-based project on modern supply chain solutions and efficiency in agricultural logistics (coming soon).</p>
+        <a href="#">🔍 Demo</a>
+        <a href="https://github.com/vishalkumarmaurya" class="github-link" target="_blank">💻 View on GitHub</a>
+      </div>
+    </div>
+  </section>
 
-    <footer class="p-6 text-center bg-gray-200">
-        <p>© 2025 Vishal Kumar Maurya | All Rights Reserved</p>
-    </footer>
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="links">
+      <a href="mailto:vishalkumarmaurya913@gmail.com">📧 Email Link</a>
+      <a href="https://www.instagram.com/vishal_kumarmaurya" target="_blank">📸 Instagram (@vishal_kumarmaurya)</a>
+      <a href="https://github.com/vishalkumarmaurya" target="_blank">💻 GitHub</a>
+      <a href="https://www.linkedin.com/in/vishalkmaurya" target="_blank">🔗 LinkedIn Link</a>
+    </div>
+  </section>
 
+  <footer>
+    © 2025 Vishal Kumar Maurya | Designed with professional integrity.
+  </footer>
 </body>
 </html>
